@@ -1,0 +1,65 @@
+#!/bin/sh
+
+wlan() {
+	
+	if grep -xq 'up' /sys/class/net/w*/operstate 2>/dev/null ; then
+		wifiicon=""
+		ssid="$(iw dev | grep -i ssid | awk '{ print $2 }')"
+	elif grep -xq 'down' /sys/class/net/w*/operstate 2>/dev/null ; then
+		wifiicon=""
+	fi
+
+	echo "$wifiicon$ssid"
+}
+
+
+
+volume() {
+	
+	vol="$(wpctl get-volume @DEFAULT_SINK@)"
+
+	[ "$vol" != "${vol%\[MUTED\]}" ] && echo "" && exit
+
+	
+	vol="${vol#Volume: }"
+	split() {
+		IFS=$2
+		set -- $1
+		printf '%s' "$@"
+	}
+
+	vol="$(printf "%.0f" "$(split "$vol" ".")")"
+
+	case 1 in
+		$((vol >= 50)) ) icon="" ;;
+		$((vol >= 1)) ) icon="" ;;
+		* ) echo  && exit ;;
+	esac
+	
+	echo "$icon$vol%"
+}
+
+battery() {
+	for battery in /sys/class/power_supply/BAT?; do
+		percent=$(cat "$battery/capacity")
+		status=$(cat "$battery/status")
+
+		if [ "$status" = "Charging" ]; then
+			icon_status=""
+		elif [ "$status" = "Discharging" ]; then
+			icon_status=""
+		fi
+
+		icon_battery=""
+
+		echo "$icon_battery$icon_status$percent%"
+	done
+}
+
+clock() {
+	echo "$(date '+%a %b %d %T')"
+}
+
+while true; do
+    echo $(clock) > ~/.config/sdorfehs/bar && sleep 1
+done

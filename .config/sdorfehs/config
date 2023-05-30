@@ -1,0 +1,29 @@
+#!/bin/sh
+
+escape M-a
+set ignoreresizehints 1
+set font "undefined"
+set barinpadding 0
+set barpadding 16 14
+set onlyborder 1
+set bgcolor #282a36
+set fgcolor #bd93f9
+set barcolor #282a36
+set barborder 4
+set barbordercolor #bd93f9
+set border 4
+set fwcolor #bd93f9
+set bwcolor #282a36
+set gap 14
+set padding 14 14 14 14
+set barsticky 1
+set bargravity nw
+warp 1
+definekey top Print exec ~/.local/bin/screenshot
+bind w exec firefox
+bind grave exec
+bind e exec st -T "neomutt mail client" -e neomutt
+bind v vmove
+bind Return exec st
+
+exec ~/.local/bin/bar &
