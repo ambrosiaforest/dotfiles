@@ -1,5 +1,4 @@
 #!/bin/sh
-
 escape M-a
 set ignoreresizehints 1
 set font "undefined"
@@ -16,14 +15,15 @@ set fwcolor #bd93f9
 set bwcolor #282a36
 set gap 14
 set padding 14 14 14 14
-set barsticky 1
-set bargravity nw
-warp 1
 definekey top Print exec ~/.local/bin/screenshot
 bind w exec firefox
+bind W windows
+bind c exec st
 bind grave exec
 bind e exec st -T "neomutt mail client" -e neomutt
 bind v vmove
-bind Return exec st
-
+bind c exec st
+bind C-r remove
+bind Q quit
+bind R only
 exec ~/.local/bin/bar &
