@@ -1,0 +1,81 @@
+* {
+    /* `otf-font-awesome` is required to be installed for icons */
+    font-family: FontAwesome, undefined;
+    font-size: 14px;
+}
+
+
+window#waybar {
+    background-color: #222222;
+    color: #FF79C6;
+}
+
+button {
+    border: none;
+    border-radius: 0;
+    background: transparent;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    background-color: transparent;
+    color: #FF79C6;
+}
+
+#workspaces button:hover {
+    box-shadow: inherit;
+    text-shadow: inherit;
+}
+
+#workspaces button.focused, #workspaces button.active {
+    background-color: #222222;
+    color: #BD93F9; 
+}
+
+#workspaces button.urgent {
+    background-color: #FF5555;
+}
+
+#clock,
+#battery,
+#pulseaudio,
+#tray {
+    background-color: transparent;
+    padding: 0 8px;
+    color: #FF79C6;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+}
+
+#battery.charging, #battery.plugged {
+    color: #50FA7B;
+    background-color: inherit;
+}
+
+/* Using steps() instead of linear as a timing function to limit cpu usage */
+#battery.critical:not(.charging) {
+    background-color: inherit;
+    color: #FF5555;
+}
+
+#pulseaudio.muted {
+    background-color: inherit;
+    color: #FF5555;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #eb4d4b;
+}
