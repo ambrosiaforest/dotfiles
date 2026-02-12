@@ -1,0 +1,2 @@
+all:
+	cp -rv * ~/.config/
