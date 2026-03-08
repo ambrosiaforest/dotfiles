@@ -1,9 +1,5 @@
 # Read `man 5 sway` for a complete reference.
 
-exec_always {
-    foot --server &
-}
-
 set $mod Mod4
 
 set $left h
@@ -24,6 +20,10 @@ output eDP-1 adaptive_sync on
 input "type:touchpad" {
     natural_scroll enabled
     middle_emulation disabled
+}
+
+input "type:keyboard" {
+    xkb_options "caps:ctrl_modifier"
 }
 
 bindsym $mod+Return exec $term
@@ -113,9 +113,8 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-default_border pixel 3
+default_border pixel 2
 gaps inner 10
-gaps outer 5
 
 # class                 border  bground text    indicator child_border
 client.focused          #BD93F9 #BD93F9 #F8F8F2 #BD93F9   #BD93F9 

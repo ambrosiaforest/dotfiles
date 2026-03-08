@@ -1,0 +1,45 @@
+#!/bin/sh
+
+volume() {
+    vol="$(wpctl get-volume @DEFAULT_AUDIO_SINK@)"
+
+    [ "$vol" != "${vol%\[MUTED\]}" ] && echo "M" && exit
+
+    vol="${vol#Volume: }"
+
+    vol="${vol/0./}"
+    vol="${vol/1./1}"
+
+    echo "$vol%"
+}
+
+batt() {
+    cat /sys/class/power_supply/BAT1/capacity
+}
+
+clock() {
+    date +'%b %d %H:%M'
+}
+
+echo "{\"version\": 1, \"click_events\": true}"
+
+echo [
+while cat << EOF; do
+[
+    {
+        "name": "volume",
+        "full_text": "vol: $(volume)"
+
+    },
+    {
+        "name": "battery",
+        "full_text": "batt: $(batt)%"
+    },
+    {
+        "name": "clock",
+        "full_text": "$(clock)"
+    }
+],
+EOF
+    sleep 1;
+done
