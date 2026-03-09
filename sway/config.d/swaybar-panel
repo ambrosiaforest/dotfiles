@@ -21,11 +21,20 @@ clock() {
     date +'%b %d %H:%M'
 }
 
+network() {
+    iw dev wlp192s0 info | awk '/ssid/ { printf $2 }' || echo "disconnected"
+}
+
+
 echo "{\"version\": 1, \"click_events\": true}"
 
 echo [
 while cat << EOF; do
 [
+    {
+        "name": "network",
+        "full_text": "wlan: $(network)"
+    },
     {
         "name": "volume",
         "full_text": "vol: $(volume)"
@@ -42,4 +51,13 @@ while cat << EOF; do
 ],
 EOF
     sleep 1;
-done
+done &
+
+while read click
+do
+    module="$(echo $click | awk -F \" '{ printf $4 }')"
+    echo $module >> /home/eepy/swaybarin
+    [ "$module" = "volume" ] && pavucontrol
+    [ "$module" = "network" ] && nm-connection-editor
+
+done < "${1:-/dev/stdin}"
