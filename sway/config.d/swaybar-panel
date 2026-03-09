@@ -25,12 +25,21 @@ network() {
     iw dev wlp192s0 info | awk '/ssid/ { printf $2 }' || echo "disconnected"
 }
 
+vpn() {
+    connection="$(mullvad status | awk '/Relay/ { printf $2 }')"
+    [ "$connection" ] && echo "$connection" || echo "disconnected"
+}
 
 echo "{\"version\": 1, \"click_events\": true}"
 
 echo [
-while cat << EOF; do
+while true; do
+    cat << EOF
 [
+    {
+        "name": "vpn",
+        "full_text": "vpn: $(vpn)"
+    },
     {
         "name": "network",
         "full_text": "wlan: $(network)"
@@ -56,8 +65,18 @@ done &
 while read click
 do
     module="$(echo $click | awk -F \" '{ printf $4 }')"
-    echo $module >> /home/eepy/swaybarin
-    [ "$module" = "volume" ] && pavucontrol
-    [ "$module" = "network" ] && nm-connection-editor
+    #echo $module >> /home/eepy/swaybarin
+    case $module in
+        "volume")
+            pavucontrol
+            ;;
+        "network")
+            nm-connection-editor
+            ;;
+        "vpn")
+            /opt/Mullvad\ VPN/mullvad-gui
+            ;;
+    esac
+
 
 done < "${1:-/dev/stdin}"
