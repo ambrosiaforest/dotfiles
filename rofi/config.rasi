@@ -7,7 +7,7 @@ configuration {
 }
 
 * {
-    font: "undefined 11";
+    font: "Spleen 32x64 11";
     foreground: #ff79c6;
     background-color: #282a36;
     active-background: #282a36;

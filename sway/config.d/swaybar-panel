@@ -38,7 +38,7 @@ while true; do
 [
     {
         "name": "vpn",
-        "full_text": "vpn: $(vpn)"
+        "full_text": "vpn: off"
     },
     {
         "name": "network",

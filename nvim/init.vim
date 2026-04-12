@@ -15,6 +15,7 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'preservim/nerdtree'
 Plug 'ap/vim-css-color'
 Plug 'jreybert/vimagit'
+Plug 'jceb/vim-orgmode'
 call plug#end()
 
 colorscheme dracula
@@ -27,14 +28,14 @@ nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 let NERDTreeShowHidden=1
 
-highlight Normal guibg=none
-highlight NonText guibg=none
-highlight Normal ctermbg=none
-highlight Normal ctermbg=none
+"highlight Normal guibg=none
+"highlight NonText guibg=none
+"highlight Normal ctermbg=none
+"highlight Normal ctermbg=none
 
 nnoremap <C-h> :bprev<CR>
 nnoremap <C-l> :bnext<CR>
-nnoremap <C-d> :bdelete<CR>
+nnoremap <C-x> :bdelete<CR>
 
 filetype on
 filetype plugin on
@@ -61,6 +62,7 @@ set ignorecase
 set smartcase
 set showmode
 set mouse=
+
 
 set wildmenu
 set wildmode=list:longest
