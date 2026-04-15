@@ -1,0 +1,129 @@
+// -*- mode: jsonc -*-
+{
+    // "layer": "top", // Waybar at top layer
+    // "position": "bottom", // Waybar position (top|bottom|left|right)
+    "height": "auto", // Waybar height (to be removed for auto height)
+    // "width": 1280, // Waybar width
+    "spacing": 4, // Gaps between modules (4px)
+    // Choose the order of the modules
+    "modules-left": [
+        "custom/left",
+        "sway/workspaces",
+        "custom/right",
+        "sway/mode",
+        "custom/left-window",
+        "sway/window",
+        "custom/right-window"
+    ],
+    "modules-center": [
+    ],
+    "modules-right": [
+		//"network",
+        "pulseaudio",
+        "battery",
+        "clock",
+        "custom/left-tray",
+        "tray",
+        "custom/right-tray"
+    ],
+    "sway/workspaces": {
+        "format": "{icon}",
+        "disable-click": true,
+        /*"format-icons": {
+            "1": "一",
+            "2": "二",
+            "3": "三",
+            "4": "四",
+            "5": "五",
+            "6": "六",
+            "7": "七",
+            "8": "八",
+            "9": "九",
+            "10": "十"
+        }*/
+    },
+    "custom/left-tray": {
+        "format": "[",
+        "tooltip": false
+    },
+    "custom/right-tray": {
+        "format": "]",
+        "tooltip": false
+    },
+    "custom/left-window": {
+        "format": "[",
+        "tooltip": false
+    },
+    "custom/right-window": {
+        "format": "]",
+        "tooltip": false
+    },
+    "custom/left": {
+        "format": "[",
+        "tooltip": false
+    },
+    "custom/right": {
+        "format": "]",
+        "tooltip": false
+    },
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "tray": {
+        //"icon-size": 13,
+        "spacing": 4
+        // "icons": {
+        //   "blueman": "bluetooth",
+        //   "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
+        // }
+    },
+    "clock": {
+        // "timezone": "America/New_York",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        //"format-alt": "{:%Y-%m-%d}"
+        "format": "[ {:%b %d %H:%M} ]"
+    },
+    "battery": {
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "[ batt: {capacity}% ]"
+        //"format-full": "{capacity}% {icon} ",
+        //"format-charging": "{capacity}%  ",
+        //"format-plugged": "{capacity}%  ",
+        //"format-alt": "{time}",
+        // "format-good": "", // An empty format will hide the module
+        //"format-full": "",
+        //"format-icons": ["", "", "", "", ""]
+    },
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "[ wlan: {essid} ]",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "[ wlan: none ]",
+        "format-alt": "[ {ipaddr}/{cidr} ]",
+        "tooltip-format": "{bandwidthUpBits}/{bandwidthDownBits}"
+		//"on-click": "nm-connection-editor"
+    },
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "[ vol: {volume}% ]",
+        //"format-bluetooth": "{volume}% {icon} {format_source}",
+        //"format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": "[ vol: M ]",
+        //"format-source": "{volume}% ",
+        //"format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    }
+}
